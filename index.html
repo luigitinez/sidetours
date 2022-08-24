@@ -17,20 +17,24 @@
         <div class="row">
             <div class="col-md-12">
                 <h3>Ejercicio 1</h3>
-                <button id="btn1" class="btn btn-primary">Probar</button>
+                <p>Reservas con fecha de entrada 01/09/2022</p>
+                <button id="btn1" class="btn btn-primary">Probar</button><button class="btn btn-danger clear" data-id="1">Reiniciar</button>
                 <div id="result1"></div>
             </div>
             <div class="col-md-12">
                 <h3>Ejercicio 2</h3>
-                <button id="btn2" class="btn btn-info">Probar</button>
+                <p>Reservas con estancia entre del 10/09/2022 y el 15/09/2022.</p>
+                <button id="btn2" class="btn btn-info">Probar</button><button  class="btn btn-danger clear" data-id="2">Reiniciar</button>
                 <div id="result2"></div>
             </div>
             <div class="col-md-12">
                 <h3>Ejercicio 3</h3>
-                <button id="btn3" class="btn btn-secondary">Probar</button>
+                <p>Total de personas por mes desde el mes actual hasta final de año.</p>
+                <button id="btn3" class="btn btn-secondary">Probar</button><button class="btn btn-danger clear" data-id="3">Reiniciar</button>
                 <div id="result3"></div>
             </div>
         </div>
+        <hr>
         <div class="row">
             <div class="col-md-12">
                 <h3>Busqueda por filtros</h3>
@@ -57,6 +61,7 @@
                         </div>
                     </div>
                     <button id="send" class="btn btn-primary">Enviar</button>
+                    <button id="clean" class="btn btn-danger">Borrar Filtros</button>
                 </div>              
             </form>
         </div>   
@@ -96,16 +101,30 @@ $( document ).ready(function() {
         });
 
     $("#btn3").click(function(){
-    $.ajax({
-        type: "POST",
-        url: "post.php",
-        data: {test:true,num:"3"},
-        success: function(respuesta){            
-            respuesta = JSON.parse(respuesta);             
-            crearTabla(respuesta,3);
-        }
+        $.ajax({
+            type: "POST",
+            url: "post.php",
+            data: {test:true,num:"3"},
+            success: function(respuesta){            
+                respuesta = JSON.parse(respuesta);             
+                crearTabla(respuesta,3);
+            }
+        });
     });
+/* borra los filtros del formulario*/
+    $("#clean").click(function(e){
+        e.preventDefault();
+        $("#filtros")[0].reset();
     });
+
+/*limpia la tabla creada por el ejercicio para volverla a ejecutar*/
+    $(".clear").click(function(){
+        const id = $(this).data('id');
+        $("#result"+id).empty();
+        $()
+    });
+
+/*envia el formulario y muestra los resultados*/
     $("#send").click(function(e){
         e.preventDefault();
         const x = $("#filtros").serializeArray();
