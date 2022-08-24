@@ -37,6 +37,8 @@
     }
 
     function get_estancias_by_interval($date1, $date2){//devolverá las estancias entre dos fechas
+        //date1 = la fecha mas lejana
+        //date2 = la fecha mas temprana
         $sql = "SELECT * FROM `reservas` WHERE fecha_entrada <'".$date1."' AND fecha_salida > '".$date2."'";
         $enlace = conectar();
         $result = $enlace->query($sql);
@@ -54,7 +56,7 @@
     }
 
     function get_reservas_by_filters($params){
-        $sqlWhere = "Where ";
+        $sqlWhere = "Where ";        
         if(isset($params['id_hotel'])){
             $sqlWhere.= "id_hotel = ".$params['id_hotel'];
         }
