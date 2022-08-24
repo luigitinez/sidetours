@@ -24,3 +24,5 @@ sidetours.sql (contenido dentro de la carpeta dump)
   Tenga en cuenta que antes de importar la base de datos debe de crear una base de datos y luego volcar el sql ya que este sql no le crea la base de datos, solo la rellena.
   Es importante si crea un usuario para este ejercicio que se asegure de dar permisos sobre la base de datos y si no coincide con la configuración de config.ini que lo edite.
   
+¡IMPORTANTE!
+En la máquina que instale este proyecto es necesario que tenga acceso a internet ya que index.html se apoya en Bootstrap y Jquery para mejorar la experiencia visual y los cdn son online.  
