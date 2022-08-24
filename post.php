@@ -1,5 +1,5 @@
 <?php
-include_once "index.php";
+include_once "backend.php";
 if(isset($_POST['test'])){
     switch ($_POST['num']) {
         case '1':
