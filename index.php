@@ -53,5 +53,27 @@
         return $rows;
     }
 
-   
+    function get_reservas_by_filters($params){
+        $sqlWhere = "Where ";
+        if(isset($params['id_hotel'])){
+            $sqlWhere.= "id_hotel = ".$params['id_hotel'];
+        }
+        if(isset($params['fe_ini'])){
+            if($sqlWhere != substr($sqlWhere,-6)){
+                $sqlWhere.= " AND ";
+            }
+            $sqlWhere.= 'fecha_entrada BETWEEN "'.$params['fe_ini'].'" AND "'. $params['fe_fin'].'"';
+        }
+        if(isset($params['fc_ini'])){
+            if($sqlWhere != substr($sqlWhere,-6)){
+                $sqlWhere.= " AND ";
+            }
+            $sqlWhere.= 'fecha_creacion BETWEEN "'.$params['fc_ini'].'" AND "'. $params['fc_fin'].'"';
+        }        
+        $sql = "SELECT * FROM reservas ". $sqlWhere;        
+        $enlace = conectar();
+        $result = $enlace->query($sql);
+        $rows=$result->fetch_all(MYSQLI_ASSOC);
+        return $rows;
+    }
 ?>      
